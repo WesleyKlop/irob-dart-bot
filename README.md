@@ -14,6 +14,7 @@ Since using CLion is not the easiest to set up you can follow this simple guide:
   - On Linux, I don't know. You probably need CMake.
 - Download and install PlatformIO core cli somewhere on your machine
   - [https://docs.platformio.org/en/latest/core/installation.html#installation-methods]()
+  - On Windows, make sure to add the path to the cli to your system environment variables.
 - Download and install the PlatformIO CLion extension
   - You can find this on the plugin marketplace inside CLion
 - Create a PlatformIO CLion project somewhere and name it "IROB-dart-bot"
