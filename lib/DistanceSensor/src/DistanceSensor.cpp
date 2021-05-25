@@ -7,7 +7,7 @@ DistanceSensor::DistanceSensor(uint8_t triggerPin, uint8_t echoPin) {
     pinMode(echoPin, INPUT);
 }
 
-double DistanceSensor::measureDistanceCm() {
+double DistanceSensor::measureDistanceCm() const {
     digitalWrite(triggerPin, LOW);
     delayMicroseconds(2);
     digitalWrite(triggerPin, HIGH);

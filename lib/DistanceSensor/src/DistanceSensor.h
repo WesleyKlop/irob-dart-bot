@@ -11,7 +11,7 @@ private:
 public:
     DistanceSensor(uint8_t triggerPin, uint8_t echoPin);
 
-    double measureDistanceCm();
+    double measureDistanceCm() const;
 };
 
 
