@@ -10,17 +10,19 @@ Since using CLion is not the easiest to set up you can follow this simple guide:
 
 - Configure the CLion toolchain for your platform
   - On Windows, use the MinGW toolchain
-  - On macOS, use the default toolchain (required xcode tools)
+  - On macOS, use the default toolchain (requires xcode tools)
   - On Linux, I don't know. You probably need CMake.
 - Download and install PlatformIO core cli somewhere on your machine
+  - [https://docs.platformio.org/en/latest/core/installation.html#installation-methods]()
 - Download and install the PlatformIO CLion extension
+  - You can find this on the plugin marketplace inside CLion
 - Create a PlatformIO CLion project somewhere and name it "IROB-dart-bot"
   - target should be arduino nano atmega328
 - Clone this repository somewhere on your computer
-  - `git clone git@github.com:WesleyKlop/IROB-dart-bot.git /tmp/dartbot`
-- Copy the .git folder into your created project
-  - `cp -r /tmp/dartbot/.git .git`
-- Reset the project to get the correct files
+  - `git clone git@github.com:WesleyKlop/IROB-dart-bot.git tmp-dartbot`
+- Copy the .git folder into your created project, and reset project
+  - `mv tmp-dartbot/.git .git`
+  - `rm -rf tmp-dartbot`
   - `git reset --hard`
 - Profit
   - You can also modify the run configurations. Remove the "build" step before it runs upload!
