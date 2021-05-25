@@ -8,13 +8,16 @@ DistanceSensor::DistanceSensor(uint8_t triggerPin, uint8_t echoPin) {
 }
 
 double DistanceSensor::measureDistanceCm() const {
+    noInterrupts();
     digitalWrite(triggerPin, LOW);
     delayMicroseconds(2);
     digitalWrite(triggerPin, HIGH);
     delayMicroseconds(10);
     digitalWrite(triggerPin, LOW);
 
-    const auto duration = (double) pulseIn(echoPin, HIGH);
+    const auto distance = (double)pulseIn(echoPin, HIGH) * 0.0343 / 2;
 
-    return (duration * .0343) / 2;
+    interrupts();
+
+    return distance;
 }
