@@ -1,8 +1,6 @@
 #include <Arduino.h>
-#include <DistanceSensor.h>
 #include <Motion.h>
 
-DistanceSensor distanceSensor(3, 2);
 Motion motion;
 
 void setup() {
@@ -11,7 +9,6 @@ void setup() {
 }
 
 void loop() {
-    Serial.println(distanceSensor.measureDistanceCm());
     Serial.print(motion.getPitch());
     Serial.println(" degrees pitch");
     Serial.print(motion.getRoll());
