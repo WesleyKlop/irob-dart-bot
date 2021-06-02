@@ -4,7 +4,7 @@ $fn = 20;
  * These values are measured for our darts set etc
  */
 electromagnet_radius = 20 + 1; // 2 cm + 1 mm
-electromagnet_height = 27; // 2.7 cm
+electromagnet_height = 27 + 1; // 2.7 cm
 elastic_radius = 2.5; // 2.5 mm
 flight_radius = 17.5 + 2; // 1.75 cm + 2 mm
 shaft_radius = 4 + 1; // 4 mm + 1 mm
@@ -36,9 +36,6 @@ module sled() {
                         rotate([0, 90, 0])
                             cylinder(r = sled_cutout_radius, h = sled_width);
                 }
-
-                //TODO: We need to cut out a cross where the dart rests.
-                // might be easier to just use a saw :-)
 
                 translate([sled_width, elastic_radius + 4, 0])
                     cylinder(r = elastic_radius, h = sled_width);
@@ -81,22 +78,36 @@ module back(isTop) {
             translate([- padding - flight_radius, sled_padding + flight_radius, 0])
                 cylinder(r = electromagnet_radius, h = electromagnet_height);
 
+        if (isTop == false) {
+            // Cut off the top
+            translate([0, 0, padding + flight_radius])
+                cube([back_padding, sled_depth, flight_radius + roof_height]);
+
+            // Left pin
+            translate([back_padding / 2, sled_padding / 2, padding + flight_radius - pin_depth])
+                cylinder(r = elastic_radius, h = pin_depth);
+
+            // Right pin
+            translate([back_padding / 2,
+                        sled_padding + flight_radius * 2 + sled_padding / 2,
+                        padding + flight_radius - pin_depth])
+                cylinder(r = elastic_radius, h = pin_depth);
+        } else {
+            // Cut off the bottom
+            cube([back_padding, sled_depth, padding + flight_radius]);
+        }
+    }
+
+    if (isTop == true) {
         // Left pin
         translate([back_padding / 2, sled_padding / 2, padding + flight_radius - pin_depth])
-            cylinder(r = elastic_radius, h = pin_depth);
+            cylinder(r = elastic_radius - 1, h = pin_depth);
 
         // Right pin
         translate([back_padding / 2,
                     sled_padding + flight_radius * 2 + sled_padding / 2,
                     padding + flight_radius - pin_depth])
-            cylinder(r = elastic_radius, h = pin_depth);
-
-        if (isTop == false) {
-            translate([0, 0, padding + flight_radius])
-                cube([back_padding, sled_depth, flight_radius + roof_height]);
-        } else {
-            cube([back_padding, sled_depth, padding + flight_radius]);
-        }
+            cylinder(r = elastic_radius - 1, h = pin_depth);
     }
 }
 
