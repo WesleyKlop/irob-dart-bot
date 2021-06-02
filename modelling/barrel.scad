@@ -51,17 +51,52 @@ module sled() {
 module roof() {
     difference() {
         union() {
-            cube([device_length + electromagnet_height, flight_radius * 2, roof_height]);
+            cube([device_length, flight_radius * 2, roof_height]);
 
-            translate([device_length,-sled_padding, 0])
-                cube([back_padding, sled_depth, flight_radius + padding / 2]);
+            rotate([180, 0, 0])
+                translate([device_length, - sled_depth + sled_padding, - padding - flight_radius * 2 - roof_height])
+                    back(true);
 
-            translate([0, -sled_padding, 0])
+            translate([0, - sled_padding, 0])
                 cube([sled_height * 2, sled_depth, roof_height]);
         }
 
-        translate([device_length, 0, roof_height / 2])
-            electromagnet();
+        translate([0, - elastic_radius - 4, roof_height])
+            rotate([0, 90, 0])
+                cylinder(r = elastic_radius, h = sled_height * 2);
+
+        translate([0, sled_depth - sled_padding - elastic_radius - 4, roof_height])
+            rotate([0, 90, 0])
+                cylinder(r = elastic_radius, h = sled_height * 2);
+    }
+}
+
+module back(isTop) {
+    difference() {
+        // Guard on the back
+        cube([back_padding, sled_depth, padding + flight_radius + flight_radius + roof_height]);
+
+        // Electromagnet cutout
+        rotate([0, 90, 0])
+            translate([- padding - flight_radius, sled_padding + flight_radius, 0])
+                cylinder(r = electromagnet_radius, h = electromagnet_height);
+
+        // Left pin
+        translate([back_padding / 2, sled_padding / 2, padding + flight_radius - pin_depth])
+            cylinder(r = elastic_radius, h = pin_depth);
+
+        // Right pin
+        translate([back_padding / 2,
+                    sled_padding + flight_radius * 2 + sled_padding / 2,
+                    padding + flight_radius - pin_depth])
+            cylinder(r = elastic_radius, h = pin_depth);
+
+        if (isTop == false) {
+            translate([0, 0, padding + flight_radius])
+                cube([back_padding, sled_depth, flight_radius + roof_height]);
+        } else {
+            cube([back_padding, sled_depth, padding + flight_radius]);
+        }
     }
 }
 
@@ -103,25 +138,7 @@ module barrel() {
                     }
 
             translate([device_length, - sled_padding, 0])
-                difference() {
-                    // Guard on the back
-                    cube([back_padding, sled_depth, padding + flight_radius]);
-
-                    // Electromagnet cutout
-                    rotate([0, 90, 0])
-                        translate([- padding - flight_radius, sled_padding + flight_radius, 0])
-                            cylinder(r = electromagnet_radius, h = electromagnet_height);
-
-                    // Left pin
-                    translate([back_padding / 2, sled_padding / 2, padding + flight_radius - pin_depth])
-                        cylinder(r = elastic_radius, h = pin_depth);
-
-                    // Right pin
-                    translate([back_padding / 2,
-                                sled_padding + flight_radius * 2 + sled_padding / 2,
-                                padding + flight_radius - pin_depth])
-                        cylinder(r = elastic_radius, h = pin_depth);
-                }
+                back(false);
         }
 
         // Shaft cutout
@@ -141,7 +158,8 @@ module electromagnet() {
             cylinder(r = electromagnet_radius, h = electromagnet_height);
 }
 
-//barrel();
+translate([0, - 150])
+    barrel();
 
 roof();
 
