@@ -74,12 +74,14 @@ module back(isTop) {
         translate([- 5, 0, 0])
             cube([back_padding + 5, sled_depth, padding + flight_radius + flight_radius + roof_height]);
 
-        // Electromagnet cutout
-        rotate([0, 90, 0])
-            translate([- padding - flight_radius, sled_padding + flight_radius, 0])
-                cylinder(r = electromagnet_radius, h = electromagnet_height);
+
 
         if (isTop == false) {
+            // Electromagnet cutout
+            rotate([0, 90, 0])
+                translate([- padding - flight_radius, sled_padding + flight_radius, 0])
+                    cylinder(r = electromagnet_radius, h = electromagnet_height);
+
             // Cut off the top
             translate([- 5, 0, padding + flight_radius])
                 cube([back_padding + 5, sled_depth, flight_radius + roof_height]);
@@ -94,6 +96,10 @@ module back(isTop) {
                         padding + flight_radius - pin_depth])
                 cylinder(r = elastic_radius, h = pin_depth);
         } else {
+            // Electromagnet cutout
+            rotate([0, 90, 0])
+                translate([- padding - flight_radius, sled_padding + flight_radius, -5])
+                    cylinder(r = electromagnet_radius, h = electromagnet_height + 5);
             // Cut off the bottom
             translate([- 5, 0, 0])
                 cube([back_padding + 5, sled_depth, padding + flight_radius]);
