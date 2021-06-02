@@ -71,8 +71,8 @@ module roof() {
 module back(isTop) {
     difference() {
         // Guard on the back
-        translate([-5, 0,0 ])
-        cube([back_padding+5, sled_depth, padding + flight_radius + flight_radius + roof_height]);
+        translate([- 5, 0, 0])
+            cube([back_padding + 5, sled_depth, padding + flight_radius + flight_radius + roof_height]);
 
         // Electromagnet cutout
         rotate([0, 90, 0])
@@ -81,8 +81,8 @@ module back(isTop) {
 
         if (isTop == false) {
             // Cut off the top
-            translate([-5, 0, padding + flight_radius])
-                cube([back_padding+5, sled_depth, flight_radius + roof_height]);
+            translate([- 5, 0, padding + flight_radius])
+                cube([back_padding + 5, sled_depth, flight_radius + roof_height]);
 
             // Left pin
             translate([back_padding / 2, sled_padding / 2, padding + flight_radius - pin_depth])
@@ -95,8 +95,8 @@ module back(isTop) {
                 cylinder(r = elastic_radius, h = pin_depth);
         } else {
             // Cut off the bottom
-            translate([-5, 0,0 ])
-            cube([back_padding + 5, sled_depth, padding + flight_radius]);
+            translate([- 5, 0, 0])
+                cube([back_padding + 5, sled_depth, padding + flight_radius]);
         }
     }
 
