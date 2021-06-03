@@ -1,12 +1,23 @@
-from flask import Flask
+from flask import Flask, render_template, request
+import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+def start():
+    return render_template('index.html')
 
+@app.route('/target', methods=["POST"])
+def setTarget():
+    data = request.get_json()
+    print(data.get("target"))
 
-if __name__ == '__main__':
-    app.run()
+    return json.dumps(True)
+
+@app.route('/result', methods=["POST"])
+def setResult():
+    data = request.get_json()
+    print(data.get("result"))
+
+    return json.dumps(True)

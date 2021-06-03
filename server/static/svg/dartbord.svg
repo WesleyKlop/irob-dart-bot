@@ -192,31 +192,31 @@
     <text y="-200" alignment-baseline="middle" transform="rotate(-90)">
       11
     </text>
-    <text y="220" alignment-baseline="middle" transform="rotate(72)">
+    <text y="200" alignment-baseline="middle" transform="rotate(72)">
       8
     </text>
-    <text y="220" alignment-baseline="middle" transform="rotate(54)">
+    <text y="200" alignment-baseline="middle" transform="rotate(54)">
       16
     </text>
-    <text y="220" alignment-baseline="middle" transform="rotate(36)">
+    <text y="200" alignment-baseline="middle" transform="rotate(36)">
       7
     </text>
-    <text y="220" alignment-baseline="middle" transform="rotate(18)">
+    <text y="200" alignment-baseline="middle" transform="rotate(18)">
       19
     </text>
-    <text y="220" alignment-baseline="middle">
+    <text y="200" alignment-baseline="middle">
       3
     </text>
-    <text y="220" alignment-baseline="middle" transform="rotate(-18)">
+    <text y="200" alignment-baseline="middle" transform="rotate(-18)">
       17
     </text>
-    <text y="220" alignment-baseline="middle" transform="rotate(-36)">
+    <text y="200" alignment-baseline="middle" transform="rotate(-36)">
       2
     </text>
-    <text y="220" alignment-baseline="middle" transform="rotate(-54)">
+    <text y="200" alignment-baseline="middle" transform="rotate(-54)">
       15
     </text>
-    <text y="220" alignment-baseline="middle" transform="rotate(-72)">
+    <text y="200" alignment-baseline="middle" transform="rotate(-72)">
       10
     </text>
   </g>

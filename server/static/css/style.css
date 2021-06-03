@@ -1,7 +1,8 @@
-h1 {
-    color: red;
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI,
+        Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
 }
 
 svg {
-    max-height: 100vh;
+    max-height: calc(100vh - 4rem);
 }
