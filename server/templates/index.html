@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Raymond van Barnebot</title>
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename= 'css/style.css') }}"
+        />
+    </head>
+    <body>
+        <div id="container"></div>
+
+        <dialog id="resultDialog">
+            <p>Wat is het resultaat? Combineren mogelijk</p>
+            <input
+                type="checkbox"
+                id="perfect"
+                name="perfect"
+                value="perfect"
+            />
+            <label for="perfect">Raak</label><br />
+            <input type="checkbox" id="left" name="left" value="left" />
+            <label for="left">Te veel naar links</label><br />
+            <input type="checkbox" id="right" name="right" value="right" />
+            <label for="right">Te veel naar rechts</label><br />
+            <input type="checkbox" id="high" name="high" value="high" />
+            <label for="high">Te hoog</label><br />
+            <input type="checkbox" id="low" name="low" value="low" />
+            <label for="low">Te laag</label><br />
+
+            <button id="saveResults">Opslaan</button>
+        </dialog>
+
+        <script src="{{ url_for('static', filename= 'js/main.js') }}"></script>
+    </body>
+</html>
