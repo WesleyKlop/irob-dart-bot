@@ -1,0 +1,223 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-250 -250 500 500">
+  <defs>
+    <use id="b" transform="scale(1.695)" xlink:href="#a"></use>
+    <use id="c" transform="scale(1.605)" xlink:href="#a"></use>
+    <use id="d" transform="scale(1.065)" xlink:href="#a"></use>
+    <use id="e" transform="scale(.975)" xlink:href="#a"></use>
+    <path id="f" stroke="silver" stroke-width="1" d="M2.566 16.2L26.52 167.4"></path>
+    <path id="a" stroke-width="0" d="M0 0l15.64 98.77a100 100 0 01-31.28 0z"></path>
+  </defs>
+  <g transform="scale(1 -1)">
+    <circle r="226"></circle>
+    <use fill="red" xlink:href="#b" data-value="40"></use>
+    <use xlink:href="#c" data-value="20"></use>
+    <use fill="red" xlink:href="#d" data-value="60"></use>
+    <use xlink:href="#e" data-value="20"></use>
+    <g transform="rotate(18)" style="">
+      <use fill="green" xlink:href="#b" data-value="10"></use>
+      <use fill="#fff" xlink:href="#c" data-value="5"></use>
+      <use fill="green" xlink:href="#d" data-value="15"></use>
+      <use fill="#fff" xlink:href="#e" data-value="5"></use>
+    </g>
+    <g transform="rotate(36)" style="">
+      <use fill="red" xlink:href="#b" data-value="24"></use>
+      <use xlink:href="#c" data-value="12"></use>
+      <use fill="red" xlink:href="#d" data-value="36"></use>
+      <use xlink:href="#e" data-value="12"></use>
+    </g>
+    <g transform="rotate(54)" style="">
+      <use fill="green" xlink:href="#b" data-value="18"></use>
+      <use fill="#fff" xlink:href="#c" data-value="9"></use>
+      <use fill="green" xlink:href="#d" data-value="27"></use>
+      <use fill="#fff" xlink:href="#e" data-value="9"></use>
+    </g>
+    <g transform="rotate(72)" style="">
+      <use fill="red" xlink:href="#b" data-value="28"></use>
+      <use xlink:href="#c" data-value="14"></use>
+      <use fill="red" xlink:href="#d" data-value="42"></use>
+      <use xlink:href="#e" data-value="14"></use>
+    </g>
+    <g transform="rotate(90)" style="">
+      <use fill="green" xlink:href="#b" data-value="22"></use>
+      <use fill="#fff" xlink:href="#c" data-value="11"></use>
+      <use fill="green" xlink:href="#d" data-value="33"></use>
+      <use fill="#fff" xlink:href="#e" data-value="11"></use>
+    </g>
+    <g transform="rotate(108)" style="">
+      <use fill="red" xlink:href="#b" data-value="16"></use>
+      <use xlink:href="#c" data-value="8"></use>
+      <use fill="red" xlink:href="#d" data-value="24"></use>
+      <use xlink:href="#e" data-value="8"></use>
+    </g>
+    <g transform="rotate(126)" style="">
+      <use fill="green" xlink:href="#b" data-value="32"></use>
+      <use fill="#fff" xlink:href="#c" data-value="16"></use>
+      <use fill="green" xlink:href="#d" data-value="48"></use>
+      <use fill="#fff" xlink:href="#e" data-value="16"></use>
+    </g>
+    <g transform="rotate(144)" style="">
+      <use fill="red" xlink:href="#b" data-value="14"></use>
+      <use xlink:href="#c" data-value="7"></use>
+      <use fill="red" xlink:href="#d" data-value="21"></use>
+      <use xlink:href="#e" data-value="7"></use>
+    </g>
+    <g transform="rotate(162)" style="">
+      <use fill="green" xlink:href="#b" data-value="38"></use>
+      <use fill="#fff" xlink:href="#c" data-value="19"></use>
+      <use fill="green" xlink:href="#d" data-value="57"></use>
+      <use fill="#fff" xlink:href="#e" data-value="19"></use>
+    </g>
+    <g transform="rotate(180)" style="">
+      <use fill="red" xlink:href="#b" data-value="6"></use>
+      <use xlink:href="#c" data-value="3"></use>
+      <use fill="red" xlink:href="#d" data-value="9"></use>
+      <use xlink:href="#e" data-value="3"></use>
+    </g>
+    <g transform="rotate(198)" style="">
+      <use fill="green" xlink:href="#b" data-value="34"></use>
+      <use fill="#fff" xlink:href="#c" data-value="17"></use>
+      <use fill="green" xlink:href="#d" data-value="51"></use>
+      <use fill="#fff" xlink:href="#e" data-value="17"></use>
+    </g>
+    <g transform="rotate(216)" style="">
+      <use fill="red" xlink:href="#b" data-value="4"></use>
+      <use xlink:href="#c" data-value="2"></use>
+      <use fill="red" xlink:href="#d" data-value="6"></use>
+      <use xlink:href="#e" data-value="2"></use>
+    </g>
+    <g transform="rotate(234)" style="">
+      <use fill="green" xlink:href="#b" style="" data-value="30"></use>
+      <use fill="#fff" xlink:href="#c" style="" data-value="15"></use>
+      <use fill="green" xlink:href="#d" style="" data-value="45"></use>
+      <use fill="#fff" xlink:href="#e" style="" data-value="15"></use>
+    </g>
+    <g transform="rotate(252)" style="">
+      <use fill="red" xlink:href="#b" style="" data-value="20"></use>
+      <use xlink:href="#c" style="" data-value="10"></use>
+      <use fill="red" xlink:href="#d" style="" data-value="30"></use>
+      <use xlink:href="#e" style="" data-value="10"></use>
+    </g>
+    <g transform="rotate(270)" style="">
+      <use fill="green" xlink:href="#b" style="" data-value="12"></use>
+      <use fill="#fff" xlink:href="#c" style="" data-value="6"></use>
+      <use fill="green" xlink:href="#d" style="" data-value="18"></use>
+      <use fill="#fff" xlink:href="#e" style="" data-value="6"></use>
+    </g>
+    <g transform="rotate(288)" style="">
+      <use fill="red" xlink:href="#b" style="" data-value="26"></use>
+      <use xlink:href="#c" style="" data-value="13"></use>
+      <use fill="red" xlink:href="#d" style="" data-value="39"></use>
+      <use xlink:href="#e" style="" data-value="13"></use>
+    </g>
+    <g transform="rotate(306)" style="">
+      <use fill="green" xlink:href="#b" data-value="8"></use>
+      <use fill="#fff" xlink:href="#c" data-value="4"></use>
+      <use fill="green" xlink:href="#d" data-value="12"></use>
+      <use fill="#fff" xlink:href="#e" data-value="4"></use>
+    </g>
+    <g transform="rotate(324)" style="">
+      <use fill="red" xlink:href="#b" style="" data-value="36"></use>
+      <use xlink:href="#c" style="" data-value="18"></use>
+      <use fill="red" xlink:href="#d" style="" data-value="54"></use>
+      <use xlink:href="#e" style="" data-value="18"></use>
+    </g>
+    <g transform="rotate(342)" style="">
+      <use fill="green" xlink:href="#b" style="" data-value="2"></use>
+      <use fill="#fff" xlink:href="#c" style="" data-value="1"></use>
+      <use fill="green" xlink:href="#d" style="" data-value="3"></use>
+      <use fill="#fff" xlink:href="#e" style="" data-value="1"></use>
+    </g>
+    <circle r="16.4" fill="green" style="" data-value="25"></circle>
+    <circle r="6.85" fill="red" style="" data-value="50"></circle>
+    <g>
+      <use xlink:href="#f"></use>
+      <use transform="rotate(18)" xlink:href="#f"></use>
+      <use transform="rotate(36)" xlink:href="#f"></use>
+      <use transform="rotate(54)" xlink:href="#f"></use>
+      <use transform="rotate(72)" xlink:href="#f"></use>
+      <use transform="rotate(90)" xlink:href="#f"></use>
+      <use transform="rotate(108)" xlink:href="#f"></use>
+      <use transform="rotate(126)" xlink:href="#f"></use>
+      <use transform="rotate(144)" xlink:href="#f"></use>
+      <use transform="rotate(162)" xlink:href="#f"></use>
+      <use transform="rotate(180)" xlink:href="#f"></use>
+      <use transform="rotate(198)" xlink:href="#f"></use>
+      <use transform="rotate(216)" xlink:href="#f"></use>
+      <use transform="rotate(234)" xlink:href="#f"></use>
+      <use transform="rotate(252)" xlink:href="#f"></use>
+      <use transform="rotate(270)" xlink:href="#f"></use>
+      <use transform="rotate(288)" xlink:href="#f"></use>
+      <use transform="rotate(306)" xlink:href="#f"></use>
+      <use transform="rotate(324)" xlink:href="#f"></use>
+      <use transform="rotate(342)" xlink:href="#f"></use>
+      <circle r="169.5" fill="none" stroke="silver"></circle>
+      <circle r="160.5" fill="none" stroke="silver"></circle>
+      <circle r="106.5" fill="none" stroke="silver"></circle>
+      <circle r="97.5" fill="none" stroke="silver"></circle>
+      <circle r="16.4" fill="none" stroke="silver"></circle>
+      <circle r="6.85" fill="none" stroke="silver"></circle>
+    </g>
+  </g>
+  <g fill="silver" font-size="30" font-weight="200" pointer-events="none" text-anchor="middle">
+    <text y="-200" alignment-baseline="middle" transform="rotate(-270)">
+      6
+    </text>
+    <text y="-200" alignment-baseline="middle" transform="rotate(-288)">
+      13
+    </text>
+    <text y="-200" alignment-baseline="middle" transform="rotate(-306)">
+      4
+    </text>
+    <text y="-200" alignment-baseline="middle" transform="rotate(-324)">
+      18
+    </text>
+    <text y="-200" alignment-baseline="middle" transform="rotate(-342)">
+      1
+    </text>
+    <text y="-200" alignment-baseline="middle">
+      20
+    </text>
+    <text y="-200" alignment-baseline="middle" transform="rotate(-18)">
+      5
+    </text>
+    <text y="-200" alignment-baseline="middle" transform="rotate(-36)">
+      12
+    </text>
+    <text y="-200" alignment-baseline="middle" transform="rotate(-54)">
+      9
+    </text>
+    <text y="-200" alignment-baseline="middle" transform="rotate(-72)">
+      14
+    </text>
+    <text y="-200" alignment-baseline="middle" transform="rotate(-90)">
+      11
+    </text>
+    <text y="220" alignment-baseline="middle" transform="rotate(72)">
+      8
+    </text>
+    <text y="220" alignment-baseline="middle" transform="rotate(54)">
+      16
+    </text>
+    <text y="220" alignment-baseline="middle" transform="rotate(36)">
+      7
+    </text>
+    <text y="220" alignment-baseline="middle" transform="rotate(18)">
+      19
+    </text>
+    <text y="220" alignment-baseline="middle">
+      3
+    </text>
+    <text y="220" alignment-baseline="middle" transform="rotate(-18)">
+      17
+    </text>
+    <text y="220" alignment-baseline="middle" transform="rotate(-36)">
+      2
+    </text>
+    <text y="220" alignment-baseline="middle" transform="rotate(-54)">
+      15
+    </text>
+    <text y="220" alignment-baseline="middle" transform="rotate(-72)">
+      10
+    </text>
+  </g>
+</svg>
