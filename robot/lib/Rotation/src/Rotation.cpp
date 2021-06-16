@@ -38,7 +38,7 @@ rotator_state Rotation::nextAction() {
 void Rotation::begin() {
     horizontalStepper.begin(90, 16);
     horizontalStepper.setEnableActiveState(LOW);
-    verticalStepper.begin(45, 16);
+    verticalStepper.begin(90, 16);
     verticalStepper.setEnableActiveState(LOW);
 }
 

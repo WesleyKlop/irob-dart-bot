@@ -17,9 +17,6 @@ command_t read_packet() {
     char *parameters;
     long degrees = strtol(package.substring(1).c_str(), &parameters, 10);
 
-    Serial.println(degrees);
-    Serial.println(parameters);
-
     command.degrees = degrees;
     command.type = parameters[0];
     command.direction = parameters[1];

@@ -6,7 +6,7 @@
 Motion motion;
 Rotation rotator = [] {
     a4988_config horizontalConfig = {2, 3, 4};
-    a4988_config verticalConfig = {7, 8, 9};
+    a4988_config verticalConfig = {5, 6, 7};
 
     Rotation rotator(horizontalConfig, verticalConfig);
     return rotator;
@@ -14,6 +14,11 @@ Rotation rotator = [] {
 
 void handleMessage(int size) {
     command_t command = read_packet();
+
+    Serial.print("Command: ");
+    Serial.print(command.type);
+    Serial.print(command.direction);
+    Serial.println(command.degrees);
 
     if (command.direction == 'u') {
         rotator.up(command.degrees);
