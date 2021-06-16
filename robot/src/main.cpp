@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <Motion.h>
 #include <Rotation.h>
+#include <Communication.h>
 
 Motion motion;
 Rotation rotator = [] {
@@ -11,23 +12,52 @@ Rotation rotator = [] {
     return rotator;
 }();
 
-void setup() {
-    Serial.begin(9600);
-    Serial.println("Going to rotate up...");
+void handleMessage(int size) {
+    command_t command = read_packet();
 
-    rotator.init();
-    rotator.up(10 * 360);
-    Serial.println("Instructed for up");
+    if (command.direction == 'u') {
+        rotator.up(command.degrees);
+    }
+    if (command.direction == 'l') {
+        rotator.left(command.degrees);
+    }
+    if (command.direction == 'd') {
+        rotator.down(command.degrees);
+    }
+    if (command.direction == 'r') {
+        rotator.right(command.degrees);
+    }
 }
+
+void setup() {
+    // Init logging
+    Serial.begin(9600);
+
+    // Init pi communication
+    Wire.begin(0x8);
+    Wire.onReceive(handleMessage);
+
+    Serial.println("started");
+    // Init motor drivers
+    rotator.begin();
+}
+
+rotator_state prev_state;
 
 void loop() {
     // motor control loop - send pulse and return how long to wait until next pulse
     auto state = rotator.nextAction();
 
-    rotator.handleState(state);
+    // If we finished, disable the motors.
+    if (prev_state.isRunning() && !state.isRunning()) {
+        rotator.handleState(state);
+    }
 
     // (optional) execute other code if we have enough time
     if (state.timeLeft() > 100) {
 
     }
+
+    // Save previous state for diffing
+    prev_state = state;
 }
