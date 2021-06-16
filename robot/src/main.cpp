@@ -3,6 +3,8 @@
 #include <Rotation.h>
 #include <Communication.h>
 
+#define SHOOT_PIN 8
+
 Motion motion;
 Rotation rotator = [] {
     a4988_config horizontalConfig = {2, 3, 4};
@@ -20,17 +22,16 @@ void handleMessage(int size) {
     Serial.print(command.direction);
     Serial.println(command.degrees);
 
-    if (command.direction == 'u') {
-        rotator.up(command.degrees);
-    }
-    if (command.direction == 'l') {
-        rotator.left(command.degrees);
-    }
-    if (command.direction == 'd') {
-        rotator.down(command.degrees);
-    }
-    if (command.direction == 'r') {
-        rotator.right(command.degrees);
+    switch (command.type) {
+        case 's':
+            digitalWrite(SHOOT_PIN, command.degrees);
+            break;
+        case 'm':
+            rotator.move(command.direction, command.degrees);
+            break;
+        default:
+            Serial.print("unknown command: ");
+            Serial.println(command.type);
     }
 }
 

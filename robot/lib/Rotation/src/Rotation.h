@@ -62,6 +62,8 @@ public:
     void begin();
 
     void handleState(rotator_state state);
+
+    void move(char direction, long degrees);
 };
 
 

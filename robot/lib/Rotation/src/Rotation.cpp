@@ -49,3 +49,18 @@ void Rotation::handleState(rotator_state state) {
         verticalStepper.disable();
     }
 }
+
+void Rotation::move(char direction, long degrees) {
+    if (direction == 'u') {
+        up(degrees);
+    }
+    if (direction == 'l') {
+        left(degrees);
+    }
+    if (direction == 'd') {
+        down(degrees);
+    }
+    if (direction == 'r') {
+        right(degrees);
+    }
+}
