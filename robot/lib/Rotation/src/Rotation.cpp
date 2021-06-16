@@ -1,21 +1,21 @@
 #include "Rotation.h"
 
-void Rotation::up(int degrees) {
+void Rotation::up(long degrees) {
     verticalStepper.enable();
     verticalStepper.startRotate(degrees);
 }
 
-void Rotation::down(int degrees) {
+void Rotation::down(long degrees) {
     verticalStepper.enable();
     verticalStepper.startRotate(-degrees);
 }
 
-void Rotation::left(int degrees) {
+void Rotation::left(long degrees) {
     horizontalStepper.enable();
     horizontalStepper.startRotate(-degrees);
 }
 
-void Rotation::right(int degrees) {
+void Rotation::right(long degrees) {
     horizontalStepper.enable();
     horizontalStepper.startRotate(degrees);
 }
@@ -35,16 +35,17 @@ rotator_state Rotation::nextAction() {
     return state;
 }
 
-void Rotation::init() {
+void Rotation::begin() {
     horizontalStepper.begin(90, 16);
     horizontalStepper.setEnableActiveState(LOW);
-    verticalStepper.begin(45, 16);
+    verticalStepper.begin(90, 16);
     verticalStepper.setEnableActiveState(LOW);
 }
 
 void Rotation::handleState(rotator_state state) {
     if (state.horizontalWaitTime == 0)
         horizontalStepper.disable();
-    if (state.verticalWaitTime == 0)
+    if (state.verticalWaitTime == 0) {
         verticalStepper.disable();
+    }
 }

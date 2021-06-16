@@ -28,6 +28,8 @@ struct rotator_state {
     rotator_state(unsigned long horWaitTime, unsigned long verWaitTime) :
             horizontalWaitTime(horWaitTime), verticalWaitTime(verWaitTime) {}
 
+    rotator_state() = default;
+
     unsigned long timeLeft() {
         return min(horizontalWaitTime, verticalWaitTime);
     }
@@ -45,19 +47,19 @@ private:
 public:
     Rotation(a4988_config hc, a4988_config vc);
 
-    void up(int degrees);
+    void up(long degrees);
 
-    void down(int degrees);
+    void down(long degrees);
 
-    void left(int degrees);
+    void left(long degrees);
 
-    void right(int degrees);
+    void right(long degrees);
 
     void stop();
 
     rotator_state nextAction();
 
-    void init();
+    void begin();
 
     void handleState(rotator_state state);
 };
