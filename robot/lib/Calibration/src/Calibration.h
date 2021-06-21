@@ -9,7 +9,6 @@ class Calibration{
 private:
     Motion acceleroMeter;
     int windowsSize = 5;
-
     float horizontalROM;
 
 public:

@@ -5,7 +5,6 @@
 #include "../../Motion/src/Motion.h"
 
 
-
 Calibration::CalibrateVertically(){
     Motion motion = Motion();
     float readings[windowsSize];
@@ -29,7 +28,7 @@ Calibration::calibrateHorizontally(bool dir){
     float readings[windowsSize];
     float sum, average, index = 0;
 
-    while(this->average != motion.getPitch()){
+    while(this->average != motion.getRoll()){
         sum = sum - this->readings[index];
 
         readings[index] = motion.getPitch();
@@ -43,6 +42,7 @@ Calibration::calibrateHorizontally(bool dir){
 
         }
     }
+
     if(dir){
         //RESET values
         motion.calibrate();
