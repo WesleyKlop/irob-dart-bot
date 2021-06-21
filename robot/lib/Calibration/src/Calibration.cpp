@@ -45,7 +45,7 @@ Calibration::calibrateHorizontally(bool dir){
     }
     if(dir){
         //RESET values
-        motion.init();
+        motion.calibrate();
         this->calibrateHorizontally(false);
     }
 
