@@ -68,7 +68,7 @@ void Calibration::verticalMax() {
         this->rotor.down(360);
     }
 
-    this->pos.pitch = movingAverage.average;
+    this->pos.roll = movingAverage.average;
 }
 
 void Calibration::horizontalMax() {
@@ -79,5 +79,5 @@ void Calibration::horizontalMax() {
         this->rotor.right(360);
     }
 
-    this->pos.roll = movingAverage.average;
+    this->pos.pitch = movingAverage.average;
 }
