@@ -5,51 +5,79 @@
 #include "../../Motion/src/Motion.h"
 
 
-Calibration::CalibrateVertically(){
-    Motion motion = Motion();
-    float readings[windowsSize];
-    float sum, average, index = 0;
 
-    while(this->average != motion.getPitch()){
-        sum = sum - this->readings[index];
+void Calibration::calibrate() {
+    this->verticalStart();
+    this->horizontalStart();
 
-        readings[index] = motion.getPitch();
-        sum = sum + motion.getPitch();
-        index = (index + 1) % windowsSize;
-        average = this->sum / windowsSize;
+    //Reset the accelerometer, this ensures our zero values are always the same
+    this->motion.calibrate();
 
-        //TODO:: Move up until no more movement is detected.
+    //Find the max values and save these into our position variable.
+    this->verticalMax();
+    this->horizontalMax();
+}
 
+//Center our dartbot so the arrow shoots straight.
+void Calibration::center() {
+    this->verticalStart();
+
+    MovingAverage movingAverage = MovingAverage(this->windowSize);
+
+    while (movingAverage.average != round((pos.pitch / 2)) ){
+        if(this->motion.getPitch > round((pos.pitch / 2)) ){
+            //Move left
+            this->rotor.left(360);
+        }
+        //Move right
+        this->rotor.right(360);
+
+        movingAverage.addValue(this->motion.getPitch);
     }
 }
 
-Calibration::calibrateHorizontally(bool dir){
-    Motion motion = Motion();
-    float readings[windowsSize];
-    float sum, average, index = 0;
+//Resets the dartbot to our 0 values.
+void Calibration::reset() {
+    this->verticalStart();
+    this->horizontalStart();
+}
 
-    while(this->average != motion.getRoll()){
-        sum = sum - this->readings[index];
+void Calibration::verticalStart() {
+    MovingAverage movingAverage = MovingAverage(this->windowSize);
 
-        readings[index] = motion.getPitch();
-        sum = sum + motion.getPitch();
-        index = (index + 1) % windowsSize;
-        average = this->sum / windowsSize;
+    while(movingAverage.average != this->motion.getRoll()){
+        movingAverage.addValue(this->motion.getRoll());
+        this->rotor.up(360);
+    }
+}
 
-        //TODO:: Move left, reset, moveright, save rom.
-        if(dir){
-            //TODO:: Move left
+void Calibration::horizontalStart(){
+    MovingAverage movingAverage = MovingAverage(this->windowSize);
 
-        }
+    while(movingAverage.average != this->motion.getPitch()){
+        movingAverage.addValue(this->motion.getPitch());
+        this->rotor.left(360);
+    }
+}
+
+void Calibration::verticalMax() {
+    MovingAverage movingAverage = MovingAverage(this->windowSize);
+
+    while(movingAverage.average != this->motion.getRoll()){
+        movingAverage.addValue(this->motion.getRoll());
+        this->rotor.down(360);
     }
 
-    if(dir){
-        //RESET values
-        motion.calibrate();
-        this->calibrateHorizontally(false);
+    this->pos.pitch = movingAverage.average;
+}
+
+void Calibration::horizontalMax() {
+    MovingAverage movingAverage = MovingAverage(this->windowSize);
+
+    while(movingAverage.average != this->motion.getPitch()){
+        movingAverage.addValue(this->motion.getPitch());
+        this->rotor.right(360);
     }
 
-    //Half of the average value should correspond to half of the rail.
-    this->horizontalROM = average;
-
+    this->pos.roll = movingAverage.average;
 }
