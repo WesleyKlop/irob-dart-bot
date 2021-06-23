@@ -4,6 +4,10 @@
 #include <Communication.h>
 
 #define SHOOT_PIN 13
+#define POT_PIN 2
+#define POT_MIN 0
+#define POT_MAX 255
+#define MAX_ANGLE 39
 
 Motion motion;
 Rotation rotator = [] {
@@ -66,6 +70,9 @@ void loop() {
         Serial.println(motion.getRoll());
         Serial.print("Pitch: ");
         Serial.println(motion.getPitch());
+
+        //Read potpin val
+        int potval = analogRead(POT_PIN);
     }
 
     // Save previous state for diffing
