@@ -1,23 +1,43 @@
 #include "Rotation.h"
 
 void Rotation::up(long degrees) {
-    verticalStepper.enable();
-    verticalStepper.startRotate(degrees);
-}
-
-void Rotation::down(long degrees) {
+    if (degrees == 0) {
+        verticalStepper.stop();
+        verticalStepper.disable();
+        return;
+    }
     verticalStepper.enable();
     verticalStepper.startRotate(-degrees);
 }
 
+void Rotation::down(long degrees) {
+    if (degrees == 0) {
+        verticalStepper.stop();
+        verticalStepper.disable();
+        return;
+    }
+    verticalStepper.enable();
+    verticalStepper.startRotate(degrees);
+}
+
 void Rotation::left(long degrees) {
+    if (degrees == 0) {
+        horizontalStepper.stop();
+        horizontalStepper.disable();
+        return;
+    }
     horizontalStepper.enable();
-    horizontalStepper.startRotate(-degrees);
+    horizontalStepper.startRotate(degrees);
 }
 
 void Rotation::right(long degrees) {
+    if (degrees == 0) {
+        horizontalStepper.stop();
+        horizontalStepper.disable();
+        return;
+    }
     horizontalStepper.enable();
-    horizontalStepper.startRotate(degrees);
+    horizontalStepper.startRotate(-degrees);
 }
 
 void Rotation::stop() {
@@ -47,5 +67,21 @@ void Rotation::handleState(rotator_state state) {
         horizontalStepper.disable();
     if (state.verticalWaitTime == 0) {
         verticalStepper.disable();
+    }
+}
+
+void Rotation::move(char direction, long degrees) {
+    switch (direction) {
+        case 'u':
+            return up(degrees);
+        case 'l':
+            return left(degrees);
+        case 'd':
+            return down(degrees);
+        case 'r':
+            return right(degrees);
+        default:
+            // Nothing to do
+            return;
     }
 }

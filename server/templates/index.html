@@ -1,37 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Raymond van Barnebot</title>
-        <link
-            rel="stylesheet"
-            href="{{ url_for('static', filename= 'css/style.css') }}"
-        />
-    </head>
-    <body>
-        <div id="container"></div>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Raymond van Barnebot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+    <script type="module" src="{{ url_for('static', filename='js/main.mjs') }}"></script>
+</head>
+<body>
 
-        <dialog id="resultDialog">
-            <p>Wat is het resultaat? Combineren mogelijk</p>
-            <input
-                type="checkbox"
-                id="perfect"
-                name="perfect"
-                value="perfect"
-            />
-            <label for="perfect">Raak</label><br />
-            <input type="checkbox" id="left" name="left" value="left" />
-            <label for="left">Te veel naar links</label><br />
-            <input type="checkbox" id="right" name="right" value="right" />
-            <label for="right">Te veel naar rechts</label><br />
-            <input type="checkbox" id="high" name="high" value="high" />
-            <label for="high">Te hoog</label><br />
-            <input type="checkbox" id="low" name="low" value="low" />
-            <label for="low">Te laag</label><br />
+<main>
+    <h1>Raymond van Barnebot</h1>
+    <button type="button" id="shoot-state-button">Activeer magneet</button>
 
-            <button id="saveResults">Opslaan</button>
-        </dialog>
+    <form action="{{ url_for('api.submit_command') }}" method="post" id="command-form">
+        <label for="command">Commando:</label>
+        <input id="command" type="text" name="command" autocomplete="off"/>
+        <button type="submit">Verstuur</button>
+    </form>
+</main>
 
-        <script src="{{ url_for('static', filename= 'js/main.js') }}"></script>
-    </body>
+<dialog id="result-dialog">
+    <form id="result-form" method="post" action="{{ url_for('api.submit_results') }}">
+        <h2>Wat is het resultaat?</h2>
+        <p>Combineren is mogelijk</p>
+
+        <label for="perfect">
+            <input type="checkbox" id="perfect" name="result" value="0"/>
+            Raak
+        </label>
+        <label for="left">
+            <input type="checkbox" id="left" name="result" value="4"/>
+            Te veel naar links
+        </label>
+        <label for="right">
+            <input type="checkbox" id="right" name="result" value="8"/>
+            Te veel naar rechts
+        </label>
+        <label for="high">
+            <input type="checkbox" id="high" name="result" value="1"/>
+            Te hoog
+        </label>
+        <label for="low">
+            <input type="checkbox" id="low" name="result" value="2"/>
+            Te laag
+        </label>
+
+        <button type="submit">Opslaan</button>
+    </form>
+</dialog>
+
+</body>
 </html>

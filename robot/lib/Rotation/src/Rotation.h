@@ -34,7 +34,7 @@ struct rotator_state {
         return min(horizontalWaitTime, verticalWaitTime);
     }
 
-    bool isRunning() {
+    bool isRunning() const {
         return horizontalWaitTime > 0 || verticalWaitTime > 0;
     }
 };
@@ -62,6 +62,8 @@ public:
     void begin();
 
     void handleState(rotator_state state);
+
+    void move(char direction, long degrees);
 };
 
 

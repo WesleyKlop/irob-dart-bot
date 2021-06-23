@@ -14,7 +14,7 @@ public:
 
     Motion();
 
-    void init();
+    void begin();
 
     float getPitch();
 

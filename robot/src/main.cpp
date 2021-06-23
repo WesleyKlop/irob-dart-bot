@@ -3,6 +3,8 @@
 #include <Rotation.h>
 #include <Communication.h>
 
+#define SHOOT_PIN 13
+
 Motion motion;
 Rotation rotator = [] {
     a4988_config horizontalConfig = {2, 3, 4};
@@ -15,22 +17,20 @@ Rotation rotator = [] {
 void handleMessage(int size) {
     command_t command = read_packet();
 
-    Serial.print("Command: ");
-    Serial.print(command.type);
-    Serial.print(command.direction);
-    Serial.println(command.degrees);
+    if(!command.type) {
+        return;
+    }
 
-    if (command.direction == 'u') {
-        rotator.up(command.degrees);
-    }
-    if (command.direction == 'l') {
-        rotator.left(command.degrees);
-    }
-    if (command.direction == 'd') {
-        rotator.down(command.degrees);
-    }
-    if (command.direction == 'r') {
-        rotator.right(command.degrees);
+    switch (command.type) {
+        case 's':
+            digitalWrite(SHOOT_PIN, command.degrees);
+            break;
+        case 'm':
+            rotator.move(command.direction, command.degrees);
+            break;
+        default:
+            Serial.print("unknown command: ");
+            Serial.println(command.type);
     }
 }
 
@@ -42,9 +42,9 @@ void setup() {
     Wire.begin(0x8);
     Wire.onReceive(handleMessage);
 
-    Serial.println("started");
-    // Init motor drivers
+    Serial.println("Going to init rotator");
     rotator.begin();
+    Serial.println("Finished setup");
 }
 
 rotator_state prev_state;
