@@ -29,14 +29,15 @@ void Motion::calibrate() {
     //this->mpu9250.setAccOffsets(-14240.0, 18220.0, -17280.0, 15590.0, -20930.0, 12080.0);
 }
 
-void Motion::begin() {
-    Wire.begin();
+void Motion::begin(const bool calibrate) {
     if (!this->mpu9250.init()) {
         Serial.println("MPU9250 does not respond");
         return;
     }
 
-    this->calibrate();
+    if (calibrate) {
+        this->calibrate();
+    }
 
     /*  Sample rate divider divides the output rate of the gyroscope and accelerometer.
      *  Sample rate = Internal sample rate / (1 + divider)

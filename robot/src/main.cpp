@@ -17,7 +17,7 @@ Rotation rotator = [] {
 void handleMessage(int size) {
     command_t command = read_packet();
 
-    if(!command.type) {
+    if (!command.type) {
         return;
     }
 
@@ -42,6 +42,8 @@ void setup() {
     Wire.begin(0x8);
     Wire.onReceive(handleMessage);
 
+    Serial.println("Going to init motion");
+    motion.begin();
     Serial.println("Going to init rotator");
     rotator.begin();
     Serial.println("Finished setup");
@@ -59,8 +61,11 @@ void loop() {
     }
 
     // (optional) execute other code if we have enough time
-    if (state.timeLeft() > 100) {
-
+    if (state.timeLeft() > 100 || !state.isRunning()) {
+        Serial.print("Roll: ");
+        Serial.println(motion.getRoll());
+        Serial.print("Pitch: ");
+        Serial.println(motion.getPitch());
     }
 
     // Save previous state for diffing

@@ -14,7 +14,11 @@ public:
 
     Motion();
 
-    void begin();
+    void begin() {
+        begin(false);
+    }
+
+    void begin(bool calibrate);
 
     float getPitch();
 
