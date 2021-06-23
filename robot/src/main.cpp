@@ -17,6 +17,10 @@ Rotation rotator = [] {
 void handleMessage(int size) {
     command_t command = read_packet();
 
+    if(!command.type) {
+        return;
+    }
+
     switch (command.type) {
         case 's':
             digitalWrite(SHOOT_PIN, command.degrees);
@@ -38,9 +42,9 @@ void setup() {
     Wire.begin(0x8);
     Wire.onReceive(handleMessage);
 
-    Serial.println("started");
-    // Init motor drivers
+    Serial.println("Going to init rotator");
     rotator.begin();
+    Serial.println("Finished setup");
 }
 
 rotator_state prev_state;

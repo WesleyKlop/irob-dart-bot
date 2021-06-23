@@ -14,6 +14,7 @@ commandForm.addEventListener('submit', async (evt) => {
     evt.preventDefault()
 
     const command = commandForm.command.value
+    commandForm.command.value = ''
 
     await executeCommand(command)
 })
