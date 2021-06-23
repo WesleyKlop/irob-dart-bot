@@ -15,11 +15,11 @@ command_t read_packet() {
     }
 
     char *parameters;
-    long degrees = strtol(package.substring(1).c_str(), &parameters, 10);
+    long degrees = strtol(package.substring(2).c_str(), &parameters, 10);
 
     command.degrees = degrees;
-    command.type = parameters[0];
-    command.direction = parameters[1];
+    command.type = package.charAt(1);
+    command.direction = parameters[0];
 
     return command;
 }

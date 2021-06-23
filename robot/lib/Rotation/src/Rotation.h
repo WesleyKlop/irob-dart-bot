@@ -34,7 +34,7 @@ struct rotator_state {
         return min(horizontalWaitTime, verticalWaitTime);
     }
 
-    bool isRunning() {
+    bool isRunning() const {
         return horizontalWaitTime > 0 || verticalWaitTime > 0;
     }
 };

@@ -3,7 +3,7 @@
 #include <Rotation.h>
 #include <Communication.h>
 
-#define SHOOT_PIN 8
+#define SHOOT_PIN 13
 
 Motion motion;
 Rotation rotator = [] {
@@ -16,11 +16,6 @@ Rotation rotator = [] {
 
 void handleMessage(int size) {
     command_t command = read_packet();
-
-    Serial.print("Command: ");
-    Serial.print(command.type);
-    Serial.print(command.direction);
-    Serial.println(command.degrees);
 
     switch (command.type) {
         case 's':
