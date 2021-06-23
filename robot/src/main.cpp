@@ -4,6 +4,10 @@
 #include <Communication.h>
 
 #define SHOOT_PIN 13
+#define POT_PIN 2
+#define POT_MIN 0
+#define POT_MAX 255
+#define MAX_ANGLE 39
 
 Motion motion;
 Rotation rotator = [] {
@@ -42,6 +46,7 @@ void setup() {
     Wire.begin(0x8);
     Wire.onReceive(handleMessage);
 
+
     Serial.println("Going to init rotator");
     rotator.begin();
     Serial.println("Finished setup");
@@ -60,7 +65,8 @@ void loop() {
 
     // (optional) execute other code if we have enough time
     if (state.timeLeft() > 100) {
-
+        //Read potpin val
+        int potval = analogRead(POT_PIN);
     }
 
     // Save previous state for diffing
