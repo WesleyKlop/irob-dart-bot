@@ -32,18 +32,21 @@ class Communication:
 
     def move_robot(self, movement: Movement) -> None:
         for (direction, degrees) in movement.instructions():
-            self.send_command(str(degrees) + Commands.MOVE + direction)
+            self.send_command(Commands.MOVE + str(degrees) + direction)
 
     def shoot_dart(self, state: bool) -> None:
-        self.send_command(Commands.SHOOT + '1' if state else '0')
+        self.send_command(Commands.SHOOT + ('1' if state else '0'))
 
 
 class FakeCommunication:
+    command_prefix: str = 'c'
+
     def send_command(self, payload: str) -> None:
-        print("payload: c" + repr(payload))
+        print("payload: " + self.command_prefix + payload)
 
     def move_robot(self, movement: Movement) -> None:
-        self.send_command(repr(movement))
+        for (direction, degrees) in movement.instructions():
+            self.send_command(Commands.MOVE + str(degrees) + direction)
 
     def shoot_dart(self, state: bool) -> None:
-        self.send_command(repr(state))
+        self.send_command(Commands.SHOOT + ('1' if state is True else '0'))

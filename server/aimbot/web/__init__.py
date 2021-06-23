@@ -1,7 +1,4 @@
-from flask import Flask, g
-
-from aimbot.aimbot import Aimbot
-from aimbot.communication import FakeCommunication, Communication
+from flask import Flask
 
 
 def create_app() -> Flask:

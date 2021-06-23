@@ -9,7 +9,8 @@ api = Blueprint('api', __name__, url_prefix='/api')
 
 @api.route('/shoot', methods=["POST"])
 def shoot():
-    get_comms().shoot_dart(request.json["state"])
+    print(repr(request.json["state"]))
+    get_comms().shoot_dart(request.json["state"] is True)
     return '', HTTPStatus.NO_CONTENT
 
 
@@ -17,8 +18,9 @@ def shoot():
 def submit_results():
     aimbot = get_aimbot()
     movement = aimbot.compensate(request.json["result"])
-    comms = get_comms()
     print(repr(movement))
+    if movement is not None:
+        get_comms().move_robot(movement)
 
     return '', HTTPStatus.NO_CONTENT
 

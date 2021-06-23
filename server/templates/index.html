@@ -3,44 +3,51 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Raymond van Barnebot</title>
-    <link
-            rel="stylesheet"
-            href="{{ url_for('static', filename= 'css/style.css') }}"
-    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+    <script type="module" src="{{ url_for('static', filename='js/main.mjs') }}"></script>
 </head>
 <body>
-<div id="container"></div>
 
-<button type="button" id="shoot-state-button">Activeer magneet</button>
+<main>
+    <h1>Raymond van Barnebot</h1>
+    <button type="button" id="shoot-state-button">Activeer magneet</button>
 
-<form action="{{  url_for('api.submit_command') }}" method="post" id="command-form">
-    <input type="text" name="command" autocomplete="off" />
-    <button type="submit">Verstuur</button>
-</form>
+    <form action="{{ url_for('api.submit_command') }}" method="post" id="command-form">
+        <label for="command">Commando:</label>
+        <input id="command" type="text" name="command" autocomplete="off"/>
+        <button type="submit">Verstuur</button>
+    </form>
+</main>
 
-<dialog id="result-dialog" style="">
+<dialog id="result-dialog">
     <form id="result-form" method="post" action="{{ url_for('api.submit_results') }}">
-        <p>Wat is het resultaat? Combineren mogelijk</p>
-        <input
-                type="checkbox"
-                id="perfect"
-                name="result"
-                value="perfect"
-        />
-        <label for="perfect">Raak</label><br/>
-        <input type="checkbox" id="left" name="result" value="4"/>
-        <label for="left">Te veel naar links</label><br/>
-        <input type="checkbox" id="right" name="result" value="8"/>
-        <label for="right">Te veel naar rechts</label><br/>
-        <input type="checkbox" id="high" name="result" value="1"/>
-        <label for="high">Te hoog</label><br/>
-        <input type="checkbox" id="low" name="result" value="2"/>
-        <label for="low">Te laag</label><br/>
+        <h2>Wat is het resultaat?</h2>
+        <p>Combineren is mogelijk</p>
+
+        <label for="perfect">
+            <input type="checkbox" id="perfect" name="result" value="0"/>
+            Raak
+        </label>
+        <label for="left">
+            <input type="checkbox" id="left" name="result" value="4"/>
+            Te veel naar links
+        </label>
+        <label for="right">
+            <input type="checkbox" id="right" name="result" value="8"/>
+            Te veel naar rechts
+        </label>
+        <label for="high">
+            <input type="checkbox" id="high" name="result" value="1"/>
+            Te hoog
+        </label>
+        <label for="low">
+            <input type="checkbox" id="low" name="result" value="2"/>
+            Te laag
+        </label>
 
         <button type="submit">Opslaan</button>
     </form>
 </dialog>
 
-<script type="module" src="{{ url_for('static', filename='js/main.mjs') }}"></script>
 </body>
 </html>

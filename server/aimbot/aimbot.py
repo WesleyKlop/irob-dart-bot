@@ -42,13 +42,13 @@ class Movement:
     def instructions(self):
         chars = ()
         if Direction.UP in self.direction:
-            chars += ('u', self.vertical)
+            chars += ('u', self.vertical),
         if Direction.DOWN in self.direction:
-            chars += ('d', self.vertical)
+            chars += ('d', self.vertical),
         if Direction.LEFT in self.direction:
-            chars += ('l', self.horizontal)
+            chars += ('l', self.horizontal),
         if Direction.RIGHT in self.direction:
-            chars += ('r', self.horizontal)
+            chars += ('r', self.horizontal),
         return chars
 
 
@@ -64,7 +64,8 @@ class Aimbot:
         self.direction = Direction(Direction.RIGHT | Direction.DOWN)
         self.prev_state = None
 
-    def compensate(self, result: ShotResult) -> Optional[Movement]:
+    def compensate(self, result: int) -> Optional[Movement]:
+        result = ShotResult(result)
         if result not in ShotResult.__members__.values() or result is ShotResult.PERFECT:
             return None
 

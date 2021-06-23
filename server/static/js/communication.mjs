@@ -19,6 +19,12 @@ export const submitResults = (result) =>
         result,
     })
 
-export const executeCommand = command => postData('/api/command', {
-    command
-})
+/**
+ * Send a raw command to the robot.
+ * @param {string} command
+ * @returns {Promise<void>}
+ */
+export const executeCommand = (command) =>
+    postData('/api/command', {
+        command,
+    })
