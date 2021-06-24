@@ -2,13 +2,34 @@ import {
     executeCommand,
     setMagnetState,
     submitResults,
+    calibrateRobot
 } from './communication.mjs'
 
+import{
+    calculateAngle
+} from './calibration.mjs'
+
 const dialog = document.querySelector('#result-dialog')
+const calibrationDialog = document.querySelector('#calibration-dialog')
 const resultForm = document.querySelector('#result-form')
 const checkboxes = Array.from(dialog.querySelectorAll('input[type="checkbox"]'))
 const shootStateButton = document.querySelector('#shoot-state-button')
 const commandForm = document.querySelector('#command-form')
+const calibrationForm = document.querySelector('#calibration-form')
+
+calibrationDialog.showModal()
+
+calibrationForm.addEventListener('submit', async (evt) => {
+    evt.preventDefault()
+
+    const x = parseFloat(calibrationForm.X.value)
+    const y = parseFloat(calibrationForm.Y.value)
+
+    const angles = calculateAngle(y, x)
+
+
+    await calibrateRobot(angles)
+})
 
 commandForm.addEventListener('submit', async (evt) => {
     evt.preventDefault()

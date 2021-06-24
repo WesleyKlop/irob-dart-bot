@@ -30,3 +30,9 @@ def submit_command():
     command = request.json["command"]
     get_comms().send_command(command)
     return '', HTTPStatus.NO_CONTENT
+
+@api.route("/calibrate", methods=["POST"])
+def submit_calibration():
+    command = request.json["calibrationValues"]
+    print(command)
+    return '', HTTPStatus.NO_CONTENT

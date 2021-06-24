@@ -28,3 +28,11 @@ export const executeCommand = (command) =>
     postData('/api/command', {
         command,
     })
+
+/**
+ * Calibrate robot to shoot in the bullseye
+ *
+ * @param calibrationValues
+ * @returns {Promise<void>}
+ */
+export const calibrateRobot = (calibrationValues) => postData('/api/calibrate', { calibrationValues })

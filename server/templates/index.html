@@ -49,5 +49,30 @@
     </form>
 </dialog>
 
+<dialog id="calibration-dialog">
+    <h2>Calibreren....</h2>
+    <p>1. Plaats de robot in lijn met het dartboard.</p>
+    <p>2. Schat de afstand tot het board</p>
+    <p>3. Schat de hoogte van de tafel waar de robot op staat MAX 1.73m</p>
+    <p>4. Pas waardes aan indien nodig</p>
+
+    <form id="calibration-form" method="post" action="#">
+        <label for="X">
+            Voer de afstand naar het bord in (Schatting)
+            <input type="text" id="X" name="result" value="2.37"/>
+        </label>
+        <br>
+        <br>
+        <label for="Y">
+            Voer de tafel hoogte in (Schatting)
+            <input type="text" id="Y" name="result" value="0.6"/>
+        </label>
+        <br>
+        <br>
+        <button type="submit" id="calibrate">Schiet</button>
+    </form>
+
+</dialog>
+
 </body>
 </html>
