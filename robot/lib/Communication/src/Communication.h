@@ -9,6 +9,6 @@ struct command_t {
     long degrees;
 };
 
-command_t read_packet();
+command_t read_packet(String package);
 
 #endif //ROBOT_COMMUNICATION_H

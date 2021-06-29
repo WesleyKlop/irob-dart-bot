@@ -5,9 +5,6 @@
 
 #define SHOOT_PIN 13
 #define POT_PIN 2
-#define POT_MIN 0
-#define POT_MAX 255
-#define MAX_ANGLE 39
 
 Motion motion;
 Rotation rotator = [] {
@@ -18,8 +15,9 @@ Rotation rotator = [] {
     return rotator;
 }();
 
-void handleMessage(int size) {
-    command_t command = read_packet();
+
+void handleMessage(String package) {
+    command_t command = read_packet(package);
 
     if (!command.type) {
         return;
@@ -32,6 +30,13 @@ void handleMessage(int size) {
         case 'm':
             rotator.move(command.direction, command.degrees);
             break;
+        case 'c' :
+            auto calibrationValues = String(analogRead(POT_PIN));
+            calibrationValues.concat(',');
+            calibrationValues.concat(motion.getRoll());
+
+            Serial.write(calibrationValues.c_str());
+            break;
         default:
             Serial.print("unknown command: ");
             Serial.println(command.type);
@@ -43,8 +48,8 @@ void setup() {
     Serial.begin(9600);
 
     // Init pi communication
-    Wire.begin(0x8);
-    Wire.onReceive(handleMessage);
+    //Wire.begin(0x8);
+    //Wire.onReceive(handleMessage);
 
     Serial.println("Going to init motion");
     motion.begin();
@@ -56,6 +61,18 @@ void setup() {
 rotator_state prev_state;
 
 void loop() {
+
+    //Check for incoming serial messages
+    if (Serial.available() > 0) {
+        // read the incoming byte:
+        String incomingMessage = Serial.readString();
+
+        Serial.print("Received: ");
+        Serial.println(incomingMessage);
+
+        handleMessage(incomingMessage);
+    }
+
     // motor control loop - send pulse and return how long to wait until next pulse
     auto state = rotator.nextAction();
 

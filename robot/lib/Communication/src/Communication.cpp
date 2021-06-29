@@ -1,11 +1,11 @@
 #include <Arduino.h>
 #include "Communication.h"
 
-command_t read_packet() {
-    String package;
-    while (Wire.available()) {
-        package += char(Wire.read());
-    }
+command_t read_packet(String package) {
+    //String package;
+    //while (Wire.available()) {
+    //  package += char(Wire.read());
+    //}
 
     command_t command{};
     if (package.charAt(0) != 'c') {
