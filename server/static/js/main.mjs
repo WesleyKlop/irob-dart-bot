@@ -41,6 +41,7 @@ calibrationForm.addEventListener('submit', async (evt) => {
 
     await calibrateRobot(angles)
     calibrationDialog.close()
+    await setMagnetState(false)
     resultForm.showModal()
 })
 
