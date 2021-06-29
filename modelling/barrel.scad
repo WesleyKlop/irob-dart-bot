@@ -20,6 +20,9 @@ sled_height = 10; // 1 cm
 sled_padding = (2 * elastic_radius) + 8; // Space between for structural integrity
 sled_depth = (flight_radius * 2) + (sled_padding * 2);
 sled_cutout_radius = shaft_radius - .5; // Subtract a bit from the structure so we can actually slide.
+sled_back_width = 47; // 4.5 cm
+sled_back_height = 15; // 1.5 cm
+sled_back_depth = 4; // 4 mm (2x metal plate)
 
 pin_depth = 5; // 5 mm
 
@@ -34,7 +37,10 @@ module sled() {
                     cube([sled_width, sled_depth, flight_radius]);
                     translate([0, sled_depth / 2, 0])
                         rotate([0, 90, 0])
-                            cylinder(r = sled_cutout_radius, h = sled_width);
+                            cylinder(r = sled_cutout_radius, h = sled_width + sled_back_depth);
+
+                    translate([sled_width, (sled_depth / 2) - (sled_back_width / 2), 0])
+                    cube([sled_back_depth, sled_back_width, flight_radius]);
                 }
 
                 translate([sled_width, elastic_radius + 4, 0])
