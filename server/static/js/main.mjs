@@ -1,13 +1,12 @@
 import {
+    calibrateRobot,
     executeCommand,
     setMagnetState,
     submitResults,
-    calibrateRobot
 } from './communication.mjs'
 
-import{
-    calculateAngle
-} from './calibration.mjs'
+import { calculateAngle } from './calibration.mjs'
+import { ShotResult } from './utils.mjs'
 
 const dialog = document.querySelector('#result-dialog')
 const calibrationDialog = document.querySelector('#calibration-dialog')
@@ -17,19 +16,32 @@ const shootStateButton = document.querySelector('#shoot-state-button')
 const commandForm = document.querySelector('#command-form')
 const calibrationForm = document.querySelector('#calibration-form')
 
+let isCalibrating = true
+
+if (localStorage.getItem('x')) {
+    calibrationForm.x.value = localStorage.getItem('x')
+}
+if (localStorage.getItem('y')) {
+    calibrationForm.y.value = localStorage.getItem('y')
+}
+
 calibrationDialog.showModal()
 
 calibrationForm.addEventListener('submit', async (evt) => {
     evt.preventDefault()
+    await setMagnetState(true)
 
-    const x = parseFloat(calibrationForm.X.value)
-    const y = parseFloat(calibrationForm.Y.value)
+    const x = parseFloat(calibrationForm.x.value)
+    const y = parseFloat(calibrationForm.y.value)
+
+    localStorage.setItem('x', x)
+    localStorage.setItem('y', y)
 
     const angles = calculateAngle(y, x)
 
-
     await calibrateRobot(angles)
     calibrationDialog.close()
+    resultForm.showModal()
 })
 
 commandForm.addEventListener('submit', async (evt) => {
@@ -67,9 +79,16 @@ resultForm.addEventListener('submit', async (evt) => {
         return val
     }).reduce((total, curr) => total | curr, 0)
 
+    if (result === ShotResult.PERFECT) {
+        isCalibrating = false
+    }
+
     await submitResults(result)
 
     dialog.close()
+    if (isCalibrating === true) {
+        calibrationDialog.showModal()
+    }
 })
 
 const ignoreList = {
