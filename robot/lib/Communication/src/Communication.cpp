@@ -1,12 +1,7 @@
 #include <Arduino.h>
 #include "Communication.h"
 
-command_t read_packet(String package) {
-    //String package;
-    //while (Wire.available()) {
-    //  package += char(Wire.read());
-    //}
-
+command_t parse_packet(const String& package) {
     command_t command{};
     if (package.charAt(0) != 'c') {
         Serial.print("invalid command received, did not start with c... package:\n  ");

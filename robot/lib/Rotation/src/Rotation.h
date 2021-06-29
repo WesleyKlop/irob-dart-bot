@@ -31,6 +31,12 @@ struct rotator_state {
     rotator_state() = default;
 
     unsigned long timeLeft() {
+        if(verticalWaitTime == 0) {
+            return horizontalWaitTime;
+        }
+        if(horizontalWaitTime == 0) {
+            return verticalWaitTime;
+        }
         return min(horizontalWaitTime, verticalWaitTime);
     }
 

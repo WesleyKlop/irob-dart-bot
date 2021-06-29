@@ -4,7 +4,7 @@
 #include <Communication.h>
 
 #define SHOOT_PIN 13
-#define POT_PIN 2
+#define POT_PIN A2
 
 Motion motion;
 Rotation rotator = [] {
@@ -15,9 +15,14 @@ Rotation rotator = [] {
     return rotator;
 }();
 
+void serialEvent() {
+    const String package = Serial.readStringUntil('\n');
+    Serial.print("Arduino recv: ");
+    Serial.println(package);
 
-void handleMessage(String package) {
-    command_t command = read_packet(package);
+    Serial.print("Executing: ");
+    Serial.println(package);
+    command_t command = parse_packet(package);
 
     if (!command.type) {
         return;
@@ -37,22 +42,13 @@ void handleMessage(String package) {
 
             Serial.write(calibrationValues.c_str());
             break;
-        default:
-            Serial.print("unknown command: ");
-            Serial.println(command.type);
     }
 }
 
 void setup() {
     // Init logging
-    Serial.begin(9600);
+    Serial.begin(115200);
 
-    // Init pi communication
-    //Wire.begin(0x8);
-    //Wire.onReceive(handleMessage);
-
-    Serial.println("Going to init motion");
-    motion.begin();
     Serial.println("Going to init rotator");
     rotator.begin();
     Serial.println("Finished setup");
@@ -61,18 +57,6 @@ void setup() {
 rotator_state prev_state;
 
 void loop() {
-
-    //Check for incoming serial messages
-    if (Serial.available() > 0) {
-        // read the incoming byte:
-        String incomingMessage = Serial.readString();
-
-        Serial.print("Received: ");
-        Serial.println(incomingMessage);
-
-        handleMessage(incomingMessage);
-    }
-
     // motor control loop - send pulse and return how long to wait until next pulse
     auto state = rotator.nextAction();
 
@@ -82,14 +66,10 @@ void loop() {
     }
 
     // (optional) execute other code if we have enough time
-    if (state.timeLeft() > 100 || !state.isRunning()) {
-        Serial.print("Roll: ");
-        Serial.println(motion.getRoll());
-        Serial.print("Pitch: ");
-        Serial.println(motion.getPitch());
-
+    if (state.timeLeft() > 5 || !state.isRunning()) {
         //Read potpin val
-        int potval = analogRead(POT_PIN);
+//        auto potval = analogRead(POT_PIN);
+//        Serial.println(potval);
     }
 
     // Save previous state for diffing

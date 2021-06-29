@@ -29,6 +29,7 @@ calibrationForm.addEventListener('submit', async (evt) => {
 
 
     await calibrateRobot(angles)
+    calibrationForm.close()
 })
 
 commandForm.addEventListener('submit', async (evt) => {

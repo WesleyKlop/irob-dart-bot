@@ -56,10 +56,12 @@ rotator_state Rotation::nextAction() {
 }
 
 void Rotation::begin() {
-    horizontalStepper.begin(90, 16);
+    horizontalStepper.begin(200, 16);
     horizontalStepper.setEnableActiveState(LOW);
-    verticalStepper.begin(90, 16);
+//    horizontalStepper.setSpeedProfile(BasicStepperDriver::LINEAR_SPEED, 2000, 1000);
+    verticalStepper.begin(200, 16);
     verticalStepper.setEnableActiveState(LOW);
+//    verticalStepper.setSpeedProfile(BasicStepperDriver::LINEAR_SPEED, 2000, 1000);
 }
 
 void Rotation::handleState(rotator_state state) {
