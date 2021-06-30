@@ -89,6 +89,7 @@ resultForm.addEventListener('submit', async (evt) => {
     resultDialog.close()
     if (isCalibrating === true) {
         calibrationDialog.showModal()
+        await setMagnetState(true)
     }
 })
 
