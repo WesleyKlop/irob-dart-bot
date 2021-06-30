@@ -16,8 +16,6 @@ const resultForm = document.querySelector('#result-form')
 const commandForm = document.querySelector('#command-form')
 const calibrationForm = document.querySelector('#calibration-form')
 
-let isCalibrating = true
-
 if (localStorage.getItem('x')) {
     calibrationForm.x.value = localStorage.getItem('x')
 }
@@ -80,17 +78,9 @@ resultForm.addEventListener('submit', async (evt) => {
         return val
     }).reduce((total, curr) => total | curr, 0)
 
-    if (result === ShotResult.PERFECT) {
-        isCalibrating = false
-    }
-
     await submitResults(result)
 
     resultDialog.close()
-    if (isCalibrating === true) {
-        await setMagnetState(true)
-        resultDialog.showModal()
-    }
 })
 
 const ignoreList = {
