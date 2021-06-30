@@ -45,7 +45,7 @@ class SerialCommunication:
 
     def move_robot(self, movement: Movement) -> None:
         for (direction, degrees) in movement.instructions():
-            self.send_data(Commands.MOVE + str(degrees) + direction)
+            self.send_data(Commands.MOVE + str(round(degrees)) + direction)
 
     def send_command(self, command: str) -> None:
         self.send_data(command)
