@@ -41,7 +41,7 @@ class SerialCommunication:
         if self.serial_obj.is_open is False:
             return False
 
-        self.serial_obj.write((self.command_prefix + data).encode('utf-8'))
+        self.serial_obj.write((self.command_prefix + data + "\n").encode('utf-8'))
 
     def move_robot(self, movement: Movement) -> None:
         for (direction, degrees) in movement.instructions():
