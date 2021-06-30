@@ -32,7 +32,7 @@ class Communication:
 
     def move_robot(self, movement: Movement) -> None:
         for (direction, degrees) in movement.instructions():
-            self.send_command(Commands.MOVE + str(degrees) + direction)
+            self.send_command(Commands.MOVE + str(round(degrees)) + direction)
 
     def shoot_dart(self, state: bool) -> None:
         self.send_command(Commands.SHOOT + ('1' if state else '0'))
