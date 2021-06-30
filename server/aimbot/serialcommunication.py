@@ -47,6 +47,9 @@ class SerialCommunication:
         for (direction, degrees) in movement.instructions():
             self.send_data(Commands.MOVE + str(degrees) + direction)
 
+    def send_command(self, command: str) -> None:
+        self.send_data(command)
+
     def shoot_dart(self, state: bool) -> None:
         self.send_data(Commands.SHOOT + ('1' if state else '0'))
 
