@@ -8,6 +8,7 @@
 #define POT_PIN A2
 #define MOTOR_RPM 150
 #define rpmToMicroSeconds(rpm) (1000000 / ((rpm) / 60 * (200 * 16)))
+#define MEASURE_BOUNDS 0.4
 
 enum app_state {
     CALIBRATING,
@@ -25,9 +26,9 @@ Rotation rotator = [] {
 
 rotator_state prevRotatorState;
 double targetYAxis = 3;
-double targetXAxis = 20;
-int verMovingDirection = 0;
-int horMovingDirection = 0;
+double targetXAxis = 512;
+int yMovingDirection = 0;
+int xMovingDirection = 0;
 app_state currentState = CALIBRATING;
 
 void serialEvent() {
@@ -48,17 +49,32 @@ void serialEvent() {
             break;
         case 'm':
             currentState = CALIBRATING;
-            rotator.move(command.direction, (long)command.degrees);
+            rotator.move(command.direction, (long) command.degrees);
             break;
         case 'p':
             currentState = CALIBRATING;
+            Serial.print("Setting ");
+            Serial.print(command.direction);
+            Serial.print(" target to ");
+            Serial.println(command.degrees);
             if (command.direction == 'x') {
                 targetXAxis = command.degrees;
+                xMovingDirection = 0;
             }
             if (command.direction == 'y') {
                 targetYAxis = command.degrees;
+                yMovingDirection = 0;
             }
             break;
+        case 'z':
+            Serial.println("--- STATS ---");
+            Serial.print("Roll:          ");
+            Serial.println(motion.getRoll());
+            Serial.print("Pot meter:     ");
+            Serial.println(analogRead(POT_PIN));
+            Serial.print("Electro state: ");
+            Serial.println(digitalRead(SHOOT_PIN));
+
     }
 }
 
@@ -93,34 +109,39 @@ void setup() {
 }
 
 void loopCalibrating() {
-    const float currentYAxis = round(motion.getRoll());
-    const auto upperYBound = (double) targetYAxis + 1;
-    const auto lowerYBound = (double) targetYAxis - 1;
-    if (currentYAxis < lowerYBound && verMovingDirection != 1) {
-        rotator.down(2 * 28800l);
-        verMovingDirection = 1;
-    } else if (currentYAxis > upperYBound && verMovingDirection != -1) {
-        rotator.up(2 * 28800l);
-        verMovingDirection = -1;
-    } else if (currentYAxis > lowerYBound && currentYAxis < upperYBound && verMovingDirection != 0) {
-        rotator.up(0);
-        verMovingDirection = 0;
-        Serial.println("Calibrated Y!");
+    if (yMovingDirection != 2) {
+        const float currentYAxis = round(motion.getRoll());
+        const auto upperYBound = (double) targetYAxis + MEASURE_BOUNDS;
+        const auto lowerYBound = (double) targetYAxis - MEASURE_BOUNDS;
+
+        if (currentYAxis < lowerYBound && yMovingDirection != 1) {
+            rotator.down(5 * 28800l);
+            yMovingDirection = 1;
+        } else if (currentYAxis > upperYBound && yMovingDirection != -1) {
+            rotator.up(5 * 28800l);
+            yMovingDirection = -1;
+        } else if (currentYAxis > lowerYBound && currentYAxis < upperYBound && yMovingDirection != 0) {
+            rotator.up(0);
+            yMovingDirection = 2;
+            Serial.println("Calibrated Y!");
+        }
     }
 
-    const int currentXAxis = analogRead(POT_PIN);
-    const auto upperXBound = (double) targetXAxis + 1;
-    const auto lowerXBound = (double) targetXAxis - 1;
-    if (currentXAxis < lowerXBound && horMovingDirection != 1) {
-        rotator.right(2 * 28800l);
-        horMovingDirection = 1;
-    } else if (currentXAxis > upperXBound && horMovingDirection != -1) {
-        rotator.left(2 * 28800l);
-        horMovingDirection = -1;
-    } else if (currentXAxis > lowerXBound && currentXAxis < upperXBound && horMovingDirection != 0) {
-        rotator.left(0);
-        horMovingDirection = 0;
-        Serial.println("Calibrated X!");
+    if (xMovingDirection != 2) {
+        const int currentXAxis = analogRead(POT_PIN);
+        const auto upperXBound = (double) targetXAxis + MEASURE_BOUNDS;
+        const auto lowerXBound = (double) targetXAxis - MEASURE_BOUNDS;
+        if (currentXAxis < lowerXBound && xMovingDirection != 1) {
+            rotator.right(5 * 28800l);
+            xMovingDirection = 1;
+        } else if (currentXAxis > upperXBound && xMovingDirection != -1) {
+            rotator.left(5 * 28800l);
+            xMovingDirection = -1;
+        } else if (currentXAxis > lowerXBound && currentXAxis < upperXBound && xMovingDirection != 0) {
+            rotator.left(0);
+            xMovingDirection = 2;
+            Serial.println("Calibrated X!");
+        }
     }
 }
 

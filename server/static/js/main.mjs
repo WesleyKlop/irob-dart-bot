@@ -34,6 +34,7 @@ calibrationForm.addEventListener('submit', async (evt) => {
         calibrationDialog.close()
         shootStateButton.dataset.active = ''
         shootStateButton.innerText = 'Schiet!'
+        await setMagnetState(true)
     } else {
         console.warn('Geen hoek gevonden.');
     }
