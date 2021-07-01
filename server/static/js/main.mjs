@@ -30,7 +30,7 @@ calibrationForm.addEventListener('submit', async (evt) => {
     const bestAngle = calculateAngle(y, x)
 
     if(bestAngle !== null) {
-        await calibrateRobot(bestAngle)
+        await calibrateRobot(bestAngle.toFixed(6))
         calibrationDialog.close()
         shootStateButton.dataset.active = ''
         shootStateButton.innerText = 'Schiet!'
