@@ -49,6 +49,8 @@ class Rotation {
 private:
     A4988 horizontalStepper;
     A4988 verticalStepper;
+    bool horizontalRunning = false;
+    bool verticalRunning = false;
 
 public:
     Rotation(a4988_config hc, a4988_config vc);
@@ -65,7 +67,7 @@ public:
 
     rotator_state nextAction();
 
-    void begin();
+    void begin(float rpm);
 
     void handleState(rotator_state state);
 

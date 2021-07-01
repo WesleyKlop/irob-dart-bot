@@ -4,9 +4,13 @@ void Rotation::up(long degrees) {
     if (degrees == 0) {
         verticalStepper.stop();
         verticalStepper.disable();
+        verticalRunning = false;
         return;
     }
-    verticalStepper.enable();
+    if (!verticalRunning) {
+        verticalStepper.enable();
+        verticalRunning = true;
+    }
     verticalStepper.startRotate(-degrees);
 }
 
@@ -14,9 +18,13 @@ void Rotation::down(long degrees) {
     if (degrees == 0) {
         verticalStepper.stop();
         verticalStepper.disable();
+        verticalRunning = false;
         return;
     }
-    verticalStepper.enable();
+    if (!verticalRunning) {
+        verticalStepper.enable();
+        verticalRunning = true;
+    }
     verticalStepper.startRotate(degrees);
 }
 
@@ -24,9 +32,13 @@ void Rotation::left(long degrees) {
     if (degrees == 0) {
         horizontalStepper.stop();
         horizontalStepper.disable();
+        horizontalRunning = false;
         return;
     }
-    horizontalStepper.enable();
+    if (!horizontalRunning) {
+        horizontalStepper.enable();
+        horizontalRunning = true;
+    }
     horizontalStepper.startRotate(degrees);
 }
 
@@ -34,9 +46,13 @@ void Rotation::right(long degrees) {
     if (degrees == 0) {
         horizontalStepper.stop();
         horizontalStepper.disable();
+        horizontalRunning = false;
         return;
     }
-    horizontalStepper.enable();
+    if (!horizontalRunning) {
+        horizontalStepper.enable();
+        horizontalRunning = true;
+    }
     horizontalStepper.startRotate(-degrees);
 }
 
@@ -55,20 +71,23 @@ rotator_state Rotation::nextAction() {
     return state;
 }
 
-void Rotation::begin() {
-    horizontalStepper.begin(200, 16);
+void Rotation::begin(float rpm) {
+    horizontalStepper.begin(rpm, 16);
     horizontalStepper.setEnableActiveState(LOW);
 //    horizontalStepper.setSpeedProfile(BasicStepperDriver::LINEAR_SPEED, 2000, 1000);
-    verticalStepper.begin(200, 16);
+    verticalStepper.begin(rpm, 16);
     verticalStepper.setEnableActiveState(LOW);
 //    verticalStepper.setSpeedProfile(BasicStepperDriver::LINEAR_SPEED, 2000, 1000);
 }
 
 void Rotation::handleState(rotator_state state) {
-    if (state.horizontalWaitTime == 0)
+    if (state.horizontalWaitTime == 0) {
         horizontalStepper.disable();
+        horizontalRunning = false;
+    }
     if (state.verticalWaitTime == 0) {
         verticalStepper.disable();
+        verticalRunning = false;
     }
 }
 

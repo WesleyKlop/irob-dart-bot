@@ -1,7 +1,7 @@
 #include "Motion.h"
 
-Motion::Motion(int addr) {
-    this->mpu9250 = MPU9250_WE(addr);
+Motion::Motion(int address) {
+    this->mpu9250 = MPU9250_WE(address);
 }
 
 Motion::Motion() : Motion(0x68) {}

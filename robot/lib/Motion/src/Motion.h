@@ -10,7 +10,7 @@ private:
     void calibrate();
 
 public:
-    explicit Motion(int addr);
+    explicit Motion(int address);
 
     Motion();
 
