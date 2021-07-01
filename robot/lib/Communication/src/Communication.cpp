@@ -10,7 +10,7 @@ command_t parse_packet(const String& package) {
     }
 
     char *parameters;
-    long degrees = strtol(package.substring(2).c_str(), &parameters, 10);
+    double degrees = strtod(package.substring(2).c_str(), &parameters);
 
     command.degrees = degrees;
     command.type = package.charAt(1);

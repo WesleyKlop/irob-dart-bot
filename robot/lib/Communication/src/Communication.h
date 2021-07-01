@@ -6,7 +6,7 @@
 struct command_t {
     char type;
     char direction;
-    long degrees;
+    double degrees;
 };
 
 command_t parse_packet(const String& package);

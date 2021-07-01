@@ -24,8 +24,8 @@ Rotation rotator = [] {
 }();
 
 rotator_state prevRotatorState;
-long targetYAxis = 3;
-long targetXAxis = 20;
+double targetYAxis = 3;
+double targetXAxis = 20;
 int verMovingDirection = 0;
 int horMovingDirection = 0;
 app_state currentState = CALIBRATING;
@@ -48,7 +48,7 @@ void serialEvent() {
             break;
         case 'm':
             currentState = CALIBRATING;
-            rotator.move(command.direction, command.degrees);
+            rotator.move(command.direction, (long)command.degrees);
             break;
         case 'p':
             currentState = CALIBRATING;
@@ -97,10 +97,10 @@ void loopCalibrating() {
     const auto upperYBound = (double) targetYAxis + 1;
     const auto lowerYBound = (double) targetYAxis - 1;
     if (currentYAxis < lowerYBound && verMovingDirection != 1) {
-        rotator.down(2 * 28800);
+        rotator.down(2 * 28800l);
         verMovingDirection = 1;
     } else if (currentYAxis > upperYBound && verMovingDirection != -1) {
-        rotator.up(2 * 28800);
+        rotator.up(2 * 28800l);
         verMovingDirection = -1;
     } else if (currentYAxis > lowerYBound && currentYAxis < upperYBound && verMovingDirection != 0) {
         rotator.up(0);
@@ -112,10 +112,10 @@ void loopCalibrating() {
     const auto upperXBound = (double) targetXAxis + 1;
     const auto lowerXBound = (double) targetXAxis - 1;
     if (currentXAxis < lowerXBound && horMovingDirection != 1) {
-        rotator.right(2 * 28800);
+        rotator.right(2 * 28800l);
         horMovingDirection = 1;
     } else if (currentXAxis > upperXBound && horMovingDirection != -1) {
-        rotator.left(2 * 28800);
+        rotator.left(2 * 28800l);
         horMovingDirection = -1;
     } else if (currentXAxis > lowerXBound && currentXAxis < upperXBound && horMovingDirection != 0) {
         rotator.left(0);

@@ -17,7 +17,6 @@ if (localStorage.getItem('y')) {
 }
 
 calibrationDialog.showModal()
-await setMagnetState(true)
 
 calibrationForm.addEventListener('submit', async (evt) => {
     evt.preventDefault()
