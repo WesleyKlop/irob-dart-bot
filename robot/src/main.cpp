@@ -8,7 +8,7 @@
 #define POT_PIN A2
 #define MOTOR_RPM 150
 #define rpmToMicroSeconds(rpm) (1000000 / ((rpm) / 60 * (200 * 16)))
-#define MEASURE_BOUNDS 0.4
+#define MEASURE_BOUNDS 0.1
 
 enum app_state {
     CALIBRATING,
@@ -52,10 +52,11 @@ void serialEvent() {
             rotator.move(command.direction, (long) command.degrees);
             break;
         case 'p':
-            currentState = CALIBRATING;
             Serial.print("Setting ");
             Serial.print(command.direction);
-            Serial.print(" target to ");
+            Serial.print(" target from ");
+            Serial.print(command.direction == 'x' ? targetXAxis : targetYAxis);
+            Serial.print(" to ");
             Serial.println(command.degrees);
             if (command.direction == 'x') {
                 targetXAxis = command.degrees;
@@ -65,6 +66,7 @@ void serialEvent() {
                 targetYAxis = command.degrees;
                 yMovingDirection = 0;
             }
+            currentState = CALIBRATING;
             break;
         case 'z':
             Serial.println("--- STATS ---");

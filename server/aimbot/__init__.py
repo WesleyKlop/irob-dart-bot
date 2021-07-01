@@ -9,7 +9,7 @@ comms_inst = None
 def get_aimbot() -> Aimbot:
     global aimbot_inst
     if aimbot_inst is None:
-        aimbot_inst = Aimbot(10800)
+        aimbot_inst = Aimbot(3600)
 
     return aimbot_inst
 
