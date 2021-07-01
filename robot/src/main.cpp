@@ -23,7 +23,7 @@ Rotation rotator = [] {
     return rotator;
 }();
 
-rotator_state prev_state;
+rotator_state prevRotatorState;
 long targetYAxis = 3;
 long targetXAxis = 20;
 int verMovingDirection = 0;
@@ -70,12 +70,12 @@ void updateMotorState() {
     }
 
     // If we finished, disable the motors.
-    if (prev_state.isRunning() && !state.isRunning()) {
+    if (prevRotatorState.isRunning() && !state.isRunning()) {
         rotator.handleState(state);
     }
 
     // Save previous state for diffing
-    prev_state = state;
+    prevRotatorState = state;
 }
 
 void setup() {
@@ -94,8 +94,8 @@ void setup() {
 
 void loopCalibrating() {
     const float currentYAxis = round(motion.getRoll());
-    const auto upperYBound = (double) targetYAxis + 0.75;
-    const auto lowerYBound = (double) targetYAxis - 0.75;
+    const auto upperYBound = (double) targetYAxis + 1;
+    const auto lowerYBound = (double) targetYAxis - 1;
     if (currentYAxis < lowerYBound && verMovingDirection != 1) {
         rotator.down(2 * 28800);
         verMovingDirection = 1;

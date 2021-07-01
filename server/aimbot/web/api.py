@@ -31,8 +31,10 @@ def submit_command():
     get_comms().send_command(command)
     return '', HTTPStatus.NO_CONTENT
 
+
 @api.route("/calibrate", methods=["POST"])
 def submit_calibration():
-    command = request.json["calibrationValues"]
-    print(command)
+    angle = request.json["angle"]
+    get_comms().position_robot(angle, 'y')
+    get_comms().position_robot(512, 'x')
     return '', HTTPStatus.NO_CONTENT

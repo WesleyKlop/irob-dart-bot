@@ -1,12 +1,5 @@
-import {
-    calibrateRobot,
-    executeCommand,
-    setMagnetState,
-    submitResults,
-} from './communication.mjs'
-
-import { calculateAngle } from './calibration.mjs'
-import { ShotResult } from './utils.mjs'
+import { calibrateRobot, executeCommand, setMagnetState, submitResults, } from './communication.mjs'
+import { calculateAngle } from "./utils.mjs";
 
 const resultDialog = document.querySelector('#result-dialog')
 const resultDialogCheckboxes = Array.from(resultDialog.querySelectorAll('input[type="checkbox"]'))
@@ -35,12 +28,16 @@ calibrationForm.addEventListener('submit', async (evt) => {
     localStorage.setItem('x', x)
     localStorage.setItem('y', y)
 
-    const angles = calculateAngle(y, x)
+    const bestAngle = calculateAngle(y, x)
 
-    await calibrateRobot(angles)
-    calibrationDialog.close()
-    await setMagnetState(false)
-    resultDialog.showModal()
+    if(bestAngle !== null) {
+        await calibrateRobot(bestAngle)
+        calibrationDialog.close()
+        shootStateButton.dataset.active = ''
+        shootStateButton.innerText = 'Schiet!'
+    } else {
+        console.warn('Geen hoek gevonden.');
+    }
 })
 
 commandForm.addEventListener('submit', async (evt) => {

@@ -17,6 +17,7 @@ class Commands(str, Enum):
     SHOOT = 's'
     MOVE = 'm'
     STATUS = 'c'
+    POSITION = 'p'
 
 
 class SerialCommunication:
@@ -46,6 +47,9 @@ class SerialCommunication:
     def move_robot(self, movement: Movement) -> None:
         for (direction, degrees) in movement.instructions():
             self.send_data(Commands.MOVE + str(round(degrees)) + direction)
+
+    def position_robot(self, angle: float, axis: str):
+        self.send_data(Commands.POSITION + str(angle) + axis)
 
     def send_command(self, command: str) -> None:
         self.send_data(command)
