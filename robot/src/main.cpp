@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <math.h>
 #include <TimerOne.h>
 #include <Motion.h>
 #include <Rotation.h>
@@ -7,8 +8,8 @@
 #define SHOOT_PIN 13
 #define POT_PIN A2
 #define MOTOR_RPM 150
-#define rpmToMicroSeconds(rpm) (1000000 / ((rpm) / 60 * (200 * 16)))
 #define MEASURE_BOUNDS 0.1
+#define rpmToMicroSeconds(rpm) (1000000 / ((rpm) / 60 * (MOTOR_STEPS * STEP_SIZE)))
 
 enum app_state {
     CALIBRATING,
@@ -112,9 +113,9 @@ void setup() {
 
 void loopCalibrating() {
     if (yMovingDirection != 2) {
-        const float currentYAxis = round(motion.getRoll());
-        const auto upperYBound = (double) targetYAxis + MEASURE_BOUNDS;
-        const auto lowerYBound = (double) targetYAxis - MEASURE_BOUNDS;
+        const auto currentYAxis = (double)lround((double)motion.getRoll());
+        const auto upperYBound =  targetYAxis + MEASURE_BOUNDS;
+        const auto lowerYBound = targetYAxis - MEASURE_BOUNDS;
 
         if (currentYAxis < lowerYBound && yMovingDirection != 1) {
             rotator.down(5 * 28800l);

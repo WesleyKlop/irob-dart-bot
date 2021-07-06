@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from flask import Blueprint, request
 
-from aimbot import get_comms, get_aimbot
+from aimbot import get_comms, get_aimbot, reset_aimbot
 
 api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -37,4 +37,9 @@ def submit_calibration():
     angle = request.json["angle"]
     get_comms().position_robot(angle, 'y')
     get_comms().position_robot(512, 'x')
+    return '', HTTPStatus.NO_CONTENT
+
+@api.route("/reset", methods=["POST"])
+def reset():
+    reset_aimbot()
     return '', HTTPStatus.NO_CONTENT

@@ -62,8 +62,8 @@ void Rotation::stop() {
 }
 
 Rotation::Rotation(a4988_config hc, a4988_config vc) :
-        horizontalStepper(200, hc.dirPin, hc.stepPin, hc.enablePin, hc.ms1Pin, hc.ms2Pin, hc.ms3Pin),
-        verticalStepper(200, vc.dirPin, vc.stepPin, vc.enablePin, vc.ms1Pin, vc.ms2Pin, vc.ms3Pin) {
+        horizontalStepper(MOTOR_STEPS, hc.dirPin, hc.stepPin, hc.enablePin, hc.ms1Pin, hc.ms2Pin, hc.ms3Pin),
+        verticalStepper(MOTOR_STEPS, vc.dirPin, vc.stepPin, vc.enablePin, vc.ms1Pin, vc.ms2Pin, vc.ms3Pin) {
 }
 
 rotator_state Rotation::nextAction() {
@@ -72,10 +72,10 @@ rotator_state Rotation::nextAction() {
 }
 
 void Rotation::begin(float rpm) {
-    horizontalStepper.begin(rpm, 16);
+    horizontalStepper.begin(rpm, STEP_SIZE);
     horizontalStepper.setEnableActiveState(LOW);
 //    horizontalStepper.setSpeedProfile(BasicStepperDriver::LINEAR_SPEED, 2000, 1000);
-    verticalStepper.begin(rpm, 16);
+    verticalStepper.begin(rpm, STEP_SIZE);
     verticalStepper.setEnableActiveState(LOW);
 //    verticalStepper.setSpeedProfile(BasicStepperDriver::LINEAR_SPEED, 2000, 1000);
 }

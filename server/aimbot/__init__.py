@@ -5,6 +5,10 @@ from aimbot.serialcommunication import SerialCommunication
 aimbot_inst = None
 comms_inst = None
 
+def reset_aimbot() -> None:
+    global aimbot_inst
+    aimbot_inst = None
+
 
 def get_aimbot() -> Aimbot:
     global aimbot_inst

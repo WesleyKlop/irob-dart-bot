@@ -3,6 +3,9 @@
 
 #include <A4988.h>
 
+#define STEP_SIZE 16
+#define MOTOR_STEPS 200
+
 struct a4988_config {
     short stepPin = PIN_UNCONNECTED;
     short dirPin = PIN_UNCONNECTED;
